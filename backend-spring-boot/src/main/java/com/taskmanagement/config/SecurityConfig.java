@@ -86,7 +86,7 @@ public class SecurityConfig {
         	    "http://localhost:3000",
         	    "http://localhost:5173",
         	    "http://localhost:5174",
-        	    "https://task-management-system-react.onrender.com"
+        	    "https://task-management-system-react-1.onrender.com"
         	));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
