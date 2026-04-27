@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8080/api'
+const BASE_URL = "https://task-management-system-react.onrender.com"
 
 export const fetchWithAuth = async (url, token, options = {}, onLogout) => {
   const headers = {
