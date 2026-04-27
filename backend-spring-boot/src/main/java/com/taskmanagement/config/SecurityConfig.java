@@ -63,12 +63,21 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("/h2-console/**").permitAll()
-                                .requestMatchers("/api/courses/**").permitAll() // DEBUG
-                                .requestMatchers("/api/submissions/**").hasAnyRole("TEACHER", "ADMIN", "STUDENT")
-                                .anyRequest().authenticated()
-                );
+                auth.requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
+
+                        // Allow ADMIN to manage users
+                        .requestMatchers("/api/users/**").hasRole("ADMIN")
+
+                        // Allow courses
+                        .requestMatchers("/api/courses/**").permitAll()
+
+                        // Allow submissions
+                        .requestMatchers("/api/submissions/**")
+                        .hasAnyRole("TEACHER", "ADMIN", "STUDENT")
+
+                        .anyRequest().authenticated()
+        );
 
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

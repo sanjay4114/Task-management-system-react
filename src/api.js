@@ -39,11 +39,25 @@ export const fetchWithAuth = async (url, token, options = {}, onLogout) => {
 }
 
 // User API
-export const getUsers = (token, onLogout) => fetchWithAuth('/users', token, {}, onLogout).then(res => res.json())
-export const createUser = (token, userData, onLogout) => fetchWithAuth('/users', token, { method: 'POST', body: JSON.stringify(userData) }, onLogout).then(res => res.json())
-export const updateUser = (token, id, userData, onLogout) => fetchWithAuth(`/users/${id}`, token, { method: 'PUT', body: JSON.stringify(userData) }, onLogout).then(res => res.json())
-export const deleteUser = (token, id, onLogout) => fetchWithAuth(`/users/${id}`, token, { method: 'DELETE' }, onLogout)
+// User API
+export const getUsers = (token, onLogout) =>
+  fetchWithAuth('/api/users', token, {}, onLogout)
+    .then(res => res.json())
 
+export const createUser = (token, userData, onLogout) =>
+  fetchWithAuth('/api/users', token,
+    { method: 'POST', body: JSON.stringify(userData) },
+    onLogout).then(res => res.json())
+
+export const updateUser = (token, id, userData, onLogout) =>
+  fetchWithAuth(`/api/users/${id}`, token,
+    { method: 'PUT', body: JSON.stringify(userData) },
+    onLogout).then(res => res.json())
+
+export const deleteUser = (token, id, onLogout) =>
+  fetchWithAuth(`/api/users/${id}`, token,
+    { method: 'DELETE' },
+    onLogout)
 // Course API
 export const getCoursesByTeacher = (token, teacherId, onLogout) => fetchWithAuth(`/courses/teacher/${teacherId}`, token, {}, onLogout).then(res => res.json())
 export const getCoursesByStudent = (token, studentId, onLogout) => fetchWithAuth(`/courses/student/${studentId}`, token, {}, onLogout).then(res => res.json())
