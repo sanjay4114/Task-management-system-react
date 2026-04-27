@@ -1,4 +1,4 @@
-const BASE_URL = "https://task-management-system-react.onrender.com"
+const BASE_URL = "https://task-management-system-react.onrender.com/api"
 
 export const fetchWithAuth = async (url, token, options = {}, onLogout) => {
   const headers = {
@@ -39,23 +39,22 @@ export const fetchWithAuth = async (url, token, options = {}, onLogout) => {
 }
 
 // User API
-// User API
 export const getUsers = (token, onLogout) =>
-  fetchWithAuth('/api/users', token, {}, onLogout)
+  fetchWithAuth('/users', token, {}, onLogout)
     .then(res => res.json())
 
 export const createUser = (token, userData, onLogout) =>
-  fetchWithAuth('/api/users', token,
+  fetchWithAuth('/users', token,
     { method: 'POST', body: JSON.stringify(userData) },
     onLogout).then(res => res.json())
 
 export const updateUser = (token, id, userData, onLogout) =>
-  fetchWithAuth(`/api/users/${id}`, token,
+  fetchWithAuth(`/users/${id}`, token,
     { method: 'PUT', body: JSON.stringify(userData) },
     onLogout).then(res => res.json())
 
 export const deleteUser = (token, id, onLogout) =>
-  fetchWithAuth(`/api/users/${id}`, token,
+  fetchWithAuth(`/users/${id}`, token,
     { method: 'DELETE' },
     onLogout)
 // Course API
