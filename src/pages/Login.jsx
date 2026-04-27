@@ -133,7 +133,7 @@ export default function Login() {
 
     try {
       const loginPayload = { email: email.trim(), password };
-      const res = await fetch('http://localhost:8080/api/auth/login', {
+      const res = await fetch('https://task-management-system-react.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginPayload)
