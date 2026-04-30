@@ -1,4 +1,4 @@
-# Use Java 21 (IMPORTANT FIX)
+# Build stage using Java 21
 FROM maven:3.9.9-eclipse-temurin-21 AS build
 
 WORKDIR /app
@@ -6,14 +6,15 @@ WORKDIR /app
 # Copy project files
 COPY . .
 
-# Build the jar
-RUN mvn clean package -DskipTests
+# Build the application
+RUN ./mvnw clean package -DskipTests
 
-# Run stage
+# Run stage using Java 21
 FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
+# Copy jar from build stage
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080

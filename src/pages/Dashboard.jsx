@@ -279,6 +279,7 @@ function AdminDashboard({ onLogout }) {
   }, [])
 
   const [sidebarCollapsed, setSidebarCollapsed] = useLocalStorageState('sidebarCollapsed', false)
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('overview')
   const [adminTasks, setAdminTasks] = useState([])
 
@@ -739,7 +740,10 @@ function AdminDashboard({ onLogout }) {
 
   return (
     <div className="layout">
-      <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`.trim()} id="sidebar">
+      <aside className={`sidebar
+        ${sidebarCollapsed ? 'collapsed' : ''}
+        ${mobileSidebarOpen ? 'mobile-open' : ''}
+      `.trim()} id="sidebar">
         <button className="sidebar-toggle" type="button" id="sidebarToggle" title="Toggle sidebar" onClick={() => setSidebarCollapsed((v) => !v)}>
           <i className="bi bi-chevron-left"></i>
         </button>
@@ -788,9 +792,19 @@ function AdminDashboard({ onLogout }) {
 
       <main className="main">
         <header className="topbar">
-          <div>
-            <h1 className="topbar-title">Admin Dashboard</h1>
-            <p className="topbar-subtitle">Monitor activity, manage users, and control settings.</p>
+          <div className="topbar-left">
+            <button
+              className="icon-btn mobile-menu-btn"
+              type="button"
+              onClick={() => setMobileSidebarOpen((v) => !v)}
+              aria-label="Toggle menu"
+            >
+              ☰
+            </button>
+            <div>
+              <h1 className="topbar-title">Admin Dashboard</h1>
+              <p className="topbar-subtitle">Monitor activity, manage users, and control settings.</p>
+            </div>
           </div>
           <div className="topbar-right">
             <ThemeToggle className="icon-btn" title="Toggle theme" />
